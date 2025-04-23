@@ -8,7 +8,7 @@ import java.io.*;
 import java.net.Socket;
 
 public class Client {
-    private String servidor = "54.166.57.115";
+    private String servidor = "18.213.122.78";
     private int puerto = 12345;
     private Socket socket;
     private MainScreen mainScreen;
