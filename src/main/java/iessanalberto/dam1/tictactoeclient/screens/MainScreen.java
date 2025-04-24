@@ -10,13 +10,15 @@ public class MainScreen {
     private VBox root = new VBox();
     private GridPane gridPane = new GridPane();
 
+
     private Label lblMensaje = new Label();
     private Client client;
 
     private Button[][] casillas = new Button [3][3];
 
-    public MainScreen() {
-        client = new Client (client.getServidor(),client.getPuerto());
+    public MainScreen(Client client) {
+        this.client = client;
+        client.setMainScreen(this);
         client.connect();
         for (int fila = 0; fila < 3; fila++){
             for (int columna = 0; columna < 3; columna++){
@@ -24,9 +26,9 @@ public class MainScreen {
                 final int finalColumna = columna;
                 Button casilla = new Button();
                 casilla.setOnAction(event -> {
-                    if (client.isMiTurno() && casilla.getText().equals(" ")){
+                    if (client.isMiTurno() && casilla.getText().isEmpty()){
                         casilla.setText(String.valueOf(client.getJugador()));
-                        client.setMiTurno(true);
+                        client.setMiTurno(false);
 
                     }
                 });
@@ -42,6 +44,7 @@ public class MainScreen {
 
 
 
+
     public Label getLblMensaje() {
         return lblMensaje;
     }
@@ -50,11 +53,15 @@ public class MainScreen {
         return root;
     }
     public void actualizarTablero(String celdas) {
-        String [] lineas = celdas.split("\n");
-        for (int i = 0, r = 0; i < lineas.length; i += 2, r++) {
-            String[] symbols = lineas[i].trim().split("\\|");
-            for (int c = 0; c < 3; c++) {
-                casillas[r][c].setText(symbols[c].trim());
+        String[] lineas = celdas.split("\n");
+        int r = 0;
+        for (String linea : lineas) {
+            if (!linea.contains("-")) {
+                String[] symbols = linea.trim().split("\\|");
+                for (int c = 0; c < 3; c++) {
+                    casillas[r][c].setText(symbols[c].trim());
+                }
+                r++;
             }
         }
     }

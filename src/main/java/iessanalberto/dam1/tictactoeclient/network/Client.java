@@ -67,7 +67,7 @@ public class Client {
     }
 
     private void procesarMensaje(String finalLinea) {
-        if (finalLinea.startsWith("Tu turno")) {
+        if (finalLinea.startsWith("Tu turno.")) {
            miTurno = true;
         } else if (finalLinea.startsWith("Tablero actual")){
             mainScreen.actualizarTablero(finalLinea.substring("Tablero actual:".length()).trim());
@@ -95,6 +95,7 @@ public class Client {
     }
 
 
-
-
+    public void setMainScreen(MainScreen mainScreen) {
+        this.mainScreen = mainScreen;
     }
+}
