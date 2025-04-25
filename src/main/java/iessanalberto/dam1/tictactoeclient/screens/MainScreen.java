@@ -28,6 +28,7 @@ public class MainScreen {
                 casilla.setOnAction(event -> {
                     if (client.isMiTurno() && casilla.getText().isEmpty()){
                         casilla.setText(String.valueOf(client.getJugador()));
+                        client.send(finalFila + "," + finalColumna);
                         client.setMiTurno(false);
 
                     }
