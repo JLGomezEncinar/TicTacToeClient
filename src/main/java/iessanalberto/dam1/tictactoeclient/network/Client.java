@@ -70,7 +70,7 @@ public class Client {
         if (finalLinea.startsWith("Tu turno.")) {
            miTurno = true;
         } else if (finalLinea.startsWith("Tablero actual")){
-            mainScreen.actualizarTablero(finalLinea.substring("Tablero actual:".length()).trim());
+            mainScreen.actualizarTablero(finalLinea.substring("Tablero actual:".length()).replace("\\n", "\n").trim());
         } else if (finalLinea.startsWith("Ganador")){
             showAlert("Final del juego", "Ganador; " + finalLinea.split(":")[1]);
         } else if (finalLinea.startsWith("Empate")){
