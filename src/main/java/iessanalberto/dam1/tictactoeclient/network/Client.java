@@ -69,7 +69,7 @@ public class Client {
     private void procesarMensaje(String finalLinea) {
         if (finalLinea.startsWith("Tu turno.")) {
            miTurno = true;
-        } else if (finalLinea.startsWith("Tablero actual")){
+        } else if (finalLinea.startsWith("Tablero actual:")){
             StringBuilder sb = new StringBuilder();
             try {
                 String linea;
