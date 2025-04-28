@@ -69,14 +69,16 @@ public class Client {
     private void procesarMensaje(String finalLinea) {
         if (finalLinea.startsWith("Tu turno.")) {
            miTurno = true;
-        } else if (finalLinea.startsWith("Tablero actual:")){
+        } else if (finalLinea.startsWith("Tablero actual:")) {
             StringBuilder sb = new StringBuilder();
             try {
                 String linea;
                 while (!(linea = bufferedReader.readLine()).equals("FIN_TABLERO")) {
                     sb.append(linea).append("\n");
                 }
-                mainScreen.actualizarTablero(sb.toString().trim());
+                Platform.runLater(() -> {
+                    mainScreen.actualizarTablero(sb.toString().trim());
+                });
             } catch (IOException e) {
                 e.printStackTrace();
             }
